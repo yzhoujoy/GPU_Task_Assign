@@ -7,13 +7,9 @@
 //
 
 
-//#include <iostream>
+#ifndef __Project__test__
+#define __Project__test__
 
-//int main()
-//{
-//
-//    // insert code here...
-//    std::cout << "Hello, World!\n";
-//    return 0;
-//}
+#include <iostream>
 
+#endif /* defined(__Project__test__) */

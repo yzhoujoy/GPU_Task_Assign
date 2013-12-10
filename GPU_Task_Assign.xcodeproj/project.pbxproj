@@ -9,7 +9,10 @@
 /* Begin PBXBuildFile section */
 		92927B3E1856FEFD00B3BD20 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 92927B3D1856FEFD00B3BD20 /* main.cpp */; };
 		92927B401856FEFD00B3BD20 /* GPU_Task_Assign.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 92927B3F1856FEFD00B3BD20 /* GPU_Task_Assign.1 */; };
-		92927B471856FF9C00B3BD20 /* Buffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 92927B461856FF9C00B3BD20 /* Buffer.cpp */; };
+		92E237DF185788960046831D /* GPU_Controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 92E237D7185788950046831D /* GPU_Controller.cpp */; };
+		92E237E0185788960046831D /* test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 92E237D8185788950046831D /* test.cpp */; };
+		92E237E1185788960046831D /* Buffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 92E237D9185788950046831D /* Buffer.cpp */; };
+		92E237E2185788960046831D /* GPU.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 92E237DC185788960046831D /* GPU.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -29,14 +32,14 @@
 		92927B391856FEFD00B3BD20 /* GPU_Task_Assign */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = GPU_Task_Assign; sourceTree = BUILT_PRODUCTS_DIR; };
 		92927B3D1856FEFD00B3BD20 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		92927B3F1856FEFD00B3BD20 /* GPU_Task_Assign.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = GPU_Task_Assign.1; sourceTree = "<group>"; };
-		92927B461856FF9C00B3BD20 /* Buffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Buffer.cpp; path = "../../Project(2)/Buffer.cpp"; sourceTree = "<group>"; };
-		92927B481856FFAC00B3BD20 /* Buffer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Buffer.h; path = "../../Project(2)/Buffer.h"; sourceTree = "<group>"; };
-		92927B491856FFAC00B3BD20 /* GPU_Controller.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = GPU_Controller.cpp; path = "../../Project(2)/GPU_Controller.cpp"; sourceTree = "<group>"; };
-		92927B4A1856FFAC00B3BD20 /* GPU_Controller.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = GPU_Controller.h; path = "../../Project(2)/GPU_Controller.h"; sourceTree = "<group>"; };
-		92927B4B1856FFAC00B3BD20 /* GPU.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = GPU.cpp; path = "../../Project(2)/GPU.cpp"; sourceTree = "<group>"; };
-		92927B4C1856FFAC00B3BD20 /* GPU.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = GPU.h; path = "../../Project(2)/GPU.h"; sourceTree = "<group>"; };
-		92927B4D1856FFB900B3BD20 /* test.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = test.cpp; path = "../../Project(2)/test.cpp"; sourceTree = "<group>"; };
-		92927B4E1856FFB900B3BD20 /* test.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = test.h; path = "../../Project(2)/test.h"; sourceTree = "<group>"; };
+		92E237D7185788950046831D /* GPU_Controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GPU_Controller.cpp; sourceTree = "<group>"; };
+		92E237D8185788950046831D /* test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = test.cpp; sourceTree = "<group>"; };
+		92E237D9185788950046831D /* Buffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Buffer.cpp; sourceTree = "<group>"; };
+		92E237DA185788950046831D /* test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = test.h; sourceTree = "<group>"; };
+		92E237DB185788950046831D /* GPU.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPU.h; sourceTree = "<group>"; };
+		92E237DC185788960046831D /* GPU.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GPU.cpp; sourceTree = "<group>"; };
+		92E237DD185788960046831D /* GPU_Controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPU_Controller.h; sourceTree = "<group>"; };
+		92E237DE185788960046831D /* Buffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Buffer.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,15 +72,15 @@
 		92927B3C1856FEFD00B3BD20 /* GPU_Task_Assign */ = {
 			isa = PBXGroup;
 			children = (
-				92927B481856FFAC00B3BD20 /* Buffer.h */,
-				92927B461856FF9C00B3BD20 /* Buffer.cpp */,
-				92927B4A1856FFAC00B3BD20 /* GPU_Controller.h */,
-				92927B491856FFAC00B3BD20 /* GPU_Controller.cpp */,
-				92927B4C1856FFAC00B3BD20 /* GPU.h */,
-				92927B4B1856FFAC00B3BD20 /* GPU.cpp */,
+				92E237D7185788950046831D /* GPU_Controller.cpp */,
+				92E237D8185788950046831D /* test.cpp */,
+				92E237D9185788950046831D /* Buffer.cpp */,
+				92E237DA185788950046831D /* test.h */,
+				92E237DB185788950046831D /* GPU.h */,
+				92E237DC185788960046831D /* GPU.cpp */,
+				92E237DD185788960046831D /* GPU_Controller.h */,
+				92E237DE185788960046831D /* Buffer.h */,
 				92927B3D1856FEFD00B3BD20 /* main.cpp */,
-				92927B4D1856FFB900B3BD20 /* test.cpp */,
-				92927B4E1856FFB900B3BD20 /* test.h */,
 				92927B3F1856FEFD00B3BD20 /* GPU_Task_Assign.1 */,
 			);
 			path = GPU_Task_Assign;
@@ -135,7 +138,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				92927B3E1856FEFD00B3BD20 /* main.cpp in Sources */,
-				92927B471856FF9C00B3BD20 /* Buffer.cpp in Sources */,
+				92E237DF185788960046831D /* GPU_Controller.cpp in Sources */,
+				92E237E0185788960046831D /* test.cpp in Sources */,
+				92E237E1185788960046831D /* Buffer.cpp in Sources */,
+				92E237E2185788960046831D /* GPU.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -228,6 +234,7 @@
 				92927B451856FEFD00B3BD20 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -6,14 +6,9 @@
 //  Copyright (c) 2013 YING ZHOU. All rights reserved.
 //
 
+#ifndef __Project__Buffer__
+#define __Project__Buffer__
 
-//#include <iostream>
+#include <iostream>
 
-//int main()
-//{
-//
-//    // insert code here...
-//    std::cout << "Hello, World!\n";
-//    return 0;
-//}
-
+#endif /* defined(__Project__Buffer__) */

@@ -7,13 +7,9 @@
 //
 
 
-//#include <iostream>
+#ifndef __Project__GPU__
+#define __Project__GPU__
 
-//int main()
-//{
-//
-//    // insert code here...
-//    std::cout << "Hello, World!\n";
-//    return 0;
-//}
+#include <iostream>
 
+#endif /* defined(__Project__GPU__) */
