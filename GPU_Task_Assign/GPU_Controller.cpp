@@ -15,39 +15,61 @@ using namespace std;
 class GPU_Controller{
 
 public:
-    map<int,int> GPU_map;//map<GPU_id,flag>
-    map<int,int> GPU_assign;//assigned GPU
+    map<int,int> GPU_map;     //map<GPU_id,flag> table for GPU status
+    map<int,int> GPU_assign;  //map<GPU_id,task> talbe for GPU assignment
     int ready_ctr,sum_buf;
     
+    /*initialization*/
     GPU_Controller(){
-        ready_ctr=0;
-        sum_buf=0;
+        ready_ctr=0;         //# of GPUs, which are ready for accepting task
+        sum_buf=0;           //# of clock toggling
     }
     
+    /*scan all GPUs to mantain map<int, int> for GPU status*/
     int parse(GPU *gpu_16[]){
+        ready_ctr=0;
         for (int counter=0; counter<16; counter++) {
             if(gpu_16[counter]->f_ready==1){
-                GPU_map[counter]=0;//ready
+                GPU_map[counter]=0;   //ready
                 ready_ctr++;
             }else{
                 GPU_map[counter]=1;  //passive_idle
+                gpu_16[counter]->passive_idle();
+                
             }
+                
         }
-        return ready_ctr;     //inform how many task should be sent
+        return ready_ctr;            //inform to buffer how many tasks should be sent
     }
     
     
-    void assign_task(GPU *gpu_16[],double *task){
+    /*assign task to GPUs*/
+    void assign_task(GPU *gpu_16[],double task[], int num_task){
         int counter =0;
-        map<int,int>::iterator iter2 = GPU_assign.begin();
-        for (iter2; iter2 !=GPU_assign.end(); iter2++) {
-            iter2->second=0;
+        int ctr_temp=0;    //recode number of tasks assigned
+        map<int,int>::iterator iter_assign = GPU_assign.begin();
+        //clean all GPU assignments in last dutation
+        for (iter_assign; iter_assign !=GPU_assign.end(); iter_assign++) {
+            iter_assign->second=0;
         }
-        map<int, int>::iterator iter = GPU_map.begin();
-        for (iter; iter != GPU_map.end(); iter++) {
-            if(iter->second==0){
-                gpu_16[iter->first]->update(task[counter]);
-                GPU_assign[iter->first]=1;
+        
+        map<int, int>::iterator iter_map = GPU_map.begin();
+        
+
+        for (int i=0; i<16; i++) {
+            if (ctr_temp<num_task) {
+                if(iter_map->second==0){
+                    gpu_16[iter_map->first]->update(task[counter]);//update GPUs status table
+                    GPU_assign[iter_map->first]=1;                 //assign task for GPU
+                    iter_map++;
+                    ctr_temp++;
+                }else{
+                    iter_map++;
+                    GPU_assign[iter_map->first]=0;
+                }
+            }else{
+                GPU_assign[iter_map->first]=0;
+                iter_map++;
             }
             counter++;
         }
@@ -57,7 +79,7 @@ public:
      int sum_per_iter(){
         int num_tog_buf=11;
         for (int ctr=0; ctr<15; ctr=ctr+2) {
-            if ((GPU_assign[ctr]==1)||(GPU_assign[++ctr]==1)) {
+            if ((GPU_assign[ctr]==1)||(GPU_assign[ctr+1]==1)) {
                 num_tog_buf +=3;
             }
         }

@@ -6,19 +6,18 @@
 //  Copyright (c) 2013 YING ZHOU. All rights reserved.
 //
 
-
 #include "GPU.h"
 using namespace std;
 
 class GPU {
 
 public:
-    int hot,busy,k,counter,f_idle,f_ready;//time;
+    int hot,k,counter,f_idle,f_ready;//time;
     double array[10];
     
+    /*initialization*/
     GPU(){
         hot = 0;
-        busy= 0;
         k=3;
         counter=0;
         f_idle=0;
@@ -30,47 +29,49 @@ public:
         }
     }
    
+    /*update task array and check thermal constrain*/
     void update(double time){
+        cout<<"in update"<<endl;
         double sum=0;
         int ctr = counter%10;
         double avg =0;
         array[ctr] = time;
+
         if(ctr>=9)
         {
-            for(ctr;ctr>ctr-9;ctr--)
+            for(int i=ctr; i>ctr-9; i--)
             {
-                sum +=array[ctr];
+                sum +=array[i];
                 
             }
         
         }
         avg = sum/10;
-        if(avg > 0.5)
-        {
-            f_idle=1;
-            passive_idle();
-            //hot=1;
-            //busy=0;
-        }
-        else
-        {
-            f_ready=0;
-            ready();
-        }
         counter++;
+        cout<<"array index in GPU = "<<counter<<endl;
+        if(avg > 0.5) passive_idle();
+        else ready();
     }
 
     void passive_idle(){
+        f_idle=1;      //force to idle
+        f_ready=0;     //not ready to work
         hot=1;
-        busy=1;
+        cout<<"k = "<<k<<endl;
         if(k>0)k--;
-        else f_idle=0;
+        else {
+            k=3;
+            f_idle=0;
+            f_ready=1;
+            cout<<"go to ready!!!!!!!!!!!!!!!!!!!!!!!!"<<endl;
+            ready();
+        }
     }
     
     void ready(){
+        f_ready=1;     //ready to accept task
+        f_idle=0;      //not idle
         hot=0;
-        busy=0;
-        f_idle=0;
     }
 
 };
