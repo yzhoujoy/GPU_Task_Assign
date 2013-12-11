@@ -78,12 +78,15 @@ public:
     
      int sum_per_iter(){
         int num_tog_buf=11;
+        int r=0;
         for (int ctr=0; ctr<15; ctr=ctr+2) {
             if ((GPU_assign[ctr]==1)||(GPU_assign[ctr+1]==1)) {
                 num_tog_buf +=3;
+                r++;
             }
         }
-        sum_buf += num_tog_buf;
+        cout<<"number of +3"<<r<<endl;
+        sum_buf = num_tog_buf;
         return sum_buf;
     }
     

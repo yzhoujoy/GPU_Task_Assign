@@ -32,14 +32,9 @@ public:
     /*store tasks from CPU to buffer*/
     void buffer_input(double *task, int size){
         for (int n=0; n<size ; n++) {
-            cout<<"input array $$$$$$= "<<*task<<endl;
             tasks[task_ctr]=*task;
             task++;
             task_ctr++;
-        }
-        map<int,double>::iterator iter_t=tasks.begin();
-        for (iter_t; iter_t !=tasks.end(); iter_t++) {
-            cout<<"^^^^^^^^^^^"<<iter_t->second<<endl;
         }
     }
     
@@ -52,12 +47,6 @@ public:
         //assign size of output array
         if (tasks.size()<num_output) out_num=(int)tasks.size();
         else out_num=num_output;
-        map<int, double>::iterator iter_temp=tasks.begin();
-        int n_temp=0;
-        for (iter_temp; iter_temp !=tasks.end(); iter_temp++) {
-            cout<<"buffer"<<n_temp<<" = "<<iter_temp->second<<endl;
-            n_temp++;
-        }
         
         double *output_pt=output_arr;
         map<int, double>::iterator iter;
@@ -67,21 +56,8 @@ public:
             output_pt++;
             tasks.erase(iter);
         }
-        if (tasks.empty()) {
-            cout<<"it's empty!"<<endl;
-        }else
-            cout<<"it's not empty!"<<endl;
         
-        int n_temp2=0;
-        map<int, double>::iterator iter_erase=tasks.begin();
-        for (iter_erase; iter_erase !=tasks.end(); iter_erase++) {
-            cout<<"buffer after erase"<<n_temp2<<" = "<<iter_temp->second<<endl;
-            n_temp2++;
-        }
         cout<<"size of output array = "<< out_num<<endl;
-        for (int i=0; i<out_num; i++) {
-            cout<<"output task = "<<output_arr[i]<<endl;
-        }
         return output_arr;
     }
     

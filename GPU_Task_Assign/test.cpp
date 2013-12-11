@@ -15,6 +15,7 @@
 using namespace std;
 
 int main(){
+    int sum_cost=0;
     GPU *gpus[16];
     for (int i=0; i<16; i++) {
         gpus[i]=new GPU();
@@ -49,38 +50,21 @@ int main(){
             input_arr=task_temp;
             num_task=10;
             task_counter+=10;
-            cout<<"task counter = "<<task_counter<<endl;
         }else{
-            cout<<"not 10 tasks"<<endl;
             int ctr_temp2=0;
-            double input_arr2[num_task];
             for (int n=task_counter; n<task_counter+num_task; n++) {
-                cout<<"in CPU array "<<task_arr[n]<<endl;
-                input_arr2[ctr_temp2]=task_arr[n];
+                task_temp[ctr_temp2]=task_arr[n];
                 ctr_temp2++;
             }
             task_counter+=num_task;
-            input_arr=input_arr2;
-            cout<<"pointer = "<<input_arr<<endl;
-            double *input_arr_t=input_arr;
-            for (int m=0; m<num_task; m++) {
-                cout<<"######"<<*input_arr_t<<endl;
-                input_arr_t++;
-            }
-            cout<<"task counter = "<<task_counter<<endl;
+            input_arr=task_temp;
         }
         
         //CPU input to Bbuffer
         cout<<"number of task to input to buffer: "<<num_task<<endl;
-        double *input_arr_tt=input_arr;
-        cout<<"pointer = "<<input_arr<<endl;
-        for (int m=0; m<num_task; m++) {
-            cout<<"!!!!!!!!"<<*input_arr_tt<<endl;
-            input_arr_tt++;
-        }
         obj->buffer_input(input_arr, num_task);
-        int cost_dp = obj->drop_cost(obj->num_drop);
-        cout<<"cost from dropped jobs: "<<cost_dp<<endl;
+        //int cost_dp = obj->drop_cost(obj->num_drop);
+        //cout<<"cost from dropped jobs: "<<cost_dp<<endl;
         
         //check ready number of GPUs
         int ready_ctr=controller->parse(gpus);
@@ -98,9 +82,15 @@ int main(){
 
         }
         
+        //cost from dropped tasks
+        int cost_dp = obj->drop_cost(obj->num_drop);
+        cout<<"cost from dropped jobs: "<<cost_dp<<endl;
         //cost from buffer toggling
         int cost_tg = controller->sum_per_iter();
-        cout<<"sum of toggling buffer ="<<cost_tg<<endl;
+        cout<<"cost of toggling buffer ="<<cost_tg<<endl;
+        //sum of cost
+        sum_cost+=cost_dp+cost_tg;
+        cout<<"sum of cost = "<<sum_cost<<endl;
         
     }
     
