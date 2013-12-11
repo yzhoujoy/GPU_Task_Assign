@@ -14,6 +14,13 @@
 #include <map>
 using namespace std;
 
+const int DURATION_SIZE=10000;
+const int TEST_VECTOR_ID=0;
+// 0: all 1
+// 1: random
+// 2: all 0.75
+// 3: all 0.5
+
 int main(){
     int sum_cost=0;
     GPU *gpus[16];
@@ -22,34 +29,50 @@ int main(){
     }
     GPU_Controller *controller= new GPU_Controller();
     double task_temp[10];
-    double task_arr [30000];
+    double task_arr [DURATION_SIZE*10];
     int task_counter=0;
-    for (int n=0; n<30000; n++) {
-        task_arr[n]=1;
-    }
     
-//    double time_arr[4];
-//    int num;
-//    
-//    time_arr[0]=0.25;
-//    time_arr[1]=0.5;
-//    time_arr[2]=0.75;
-//    time_arr[3]=1;
-//    for(int i=0;i<30000;i++)
-//    {
-//        num = rand()%4;
-//        //cout<<"random number is "<<num<<endl;
-//        task_arr[i] = time_arr[num];
-//        cout<<"task array !!!!!"<<i<<"   "<<task_arr[i]<<endl;
-//    }
-
+    switch (TEST_VECTOR_ID) {
+        case 0:// all 1's
+            for (int n=0; n<DURATION_SIZE*10; n++) {
+                task_arr[n]=1;
+            }
+            break;
+        case 1:// random
+            double time_arr[4];
+            int num;
+            time_arr[0]=0.25;
+            time_arr[1]=0.5;
+            time_arr[2]=0.75;
+            time_arr[3]=1;
+            for(int i=0;i<DURATION_SIZE*10;i++)
+            {
+                num = rand()%4;
+                task_arr[i] = time_arr[num];
+            }
+            break;
+        case 2:// all 0.75's
+            for (int n=0; n<DURATION_SIZE*10; n++) {
+                task_arr[n]=0.75;
+            }
+            break;
+            
+        case 3:// all 0.5's
+            for (int n=0; n<DURATION_SIZE*10; n++) {
+                task_arr[n]=0.75;
+            }
+            break;
+            
+        default: cout<<"err: wrong TEST_VECTOR_ID"<<endl;
+    }
+   
     
     Buffer *obj = new Buffer();
     int num_task=0;
     double *input_arr=NULL;
     
     
-    for (int i=0; i<20; i++) {                    //for duration
+    for (int i=0; i<DURATION_SIZE; i++) {                    //for duration
         cout<<"$$$$$$$$$$$$$$$$$ "<<i<<endl;
         
         //empty buffer size
