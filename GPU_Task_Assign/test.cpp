@@ -49,7 +49,7 @@ int main(){
     double *input_arr=NULL;
     
     
-    for (int i=0; i<3000; i++) {                    //for duration
+    for (int i=0; i<20; i++) {                    //for duration
         cout<<"$$$$$$$$$$$$$$$$$ "<<i<<endl;
         
         //empty buffer size

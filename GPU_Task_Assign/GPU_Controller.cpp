@@ -104,10 +104,12 @@ public:
                     iter_map++;
                     ctr_temp++;
                 }else{
+                    gpu_16[iter_map->first]->update(0.0);
                     iter_map++;
                     GPU_assign[iter_map->first]=0;
                 }
             }else{
+                gpu_16[iter_map->first]->update(0.0);
                 GPU_assign[iter_map->first]=0;
                 iter_map++;
             }
