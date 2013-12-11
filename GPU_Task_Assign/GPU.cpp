@@ -77,7 +77,7 @@ public:
         f_ready=0;     //not ready to work
         hot=1;
         k-=2;
-        cout<<"k_ = "<<k<<endl;
+        cout<<"k_p = "<<k<<endl;
     }
     
     void ready(){

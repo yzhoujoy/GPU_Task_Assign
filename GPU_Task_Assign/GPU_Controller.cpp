@@ -32,16 +32,20 @@ public:
             GPU_map[c1]=1;
             GPU_map[c2]=1;
             if (gpu_16[c1]->f_ready==1 && gpu_16[c2]->f_ready==1) {
+                cout<<c1<<" : ready"<< c2<<" :ready"<<endl;
                 ready_ctr+=2;
                 GPU_map[c1]=0;
                 GPU_map[c2]=0;
             }else if (gpu_16[c1]->f_idle==1 && gpu_16[c2]->f_ready==1){
+                cout<<c1<<": idle"<<c2<<" : force idle"<<endl;
                 gpu_16[c1]->passive_idle();
                 gpu_16[c2]->passive_idle_();
             }else if (gpu_16[c1]->f_ready==1 && gpu_16[c2]->f_idle==1){
+                cout<<c1<<": force idle"<<c2<<" : idle"<<endl;
                 gpu_16[c1]->passive_idle_();
                 gpu_16[c2]->passive_idle();
             }else if (gpu_16[c1]->f_idle==1 && gpu_16[c2]->f_idle==1){
+                cout<<c1<<": idle"<<c2<<" : idle"<<endl;
                 gpu_16[c1]->passive_idle();
                 gpu_16[c2]->passive_idle();
             }
@@ -104,12 +108,14 @@ public:
                     iter_map++;
                     ctr_temp++;
                 }else{
-                    gpu_16[iter_map->first]->update(0.0);
+                    //gpu_16[iter_map->first]->update(0.0);
                     iter_map++;
                     GPU_assign[iter_map->first]=0;
                 }
             }else{
-                gpu_16[iter_map->first]->update(0.0);
+                if (iter_map->second==0) {
+                    gpu_16[iter_map->first]->update(0.0);
+                }
                 GPU_assign[iter_map->first]=0;
                 iter_map++;
             }
