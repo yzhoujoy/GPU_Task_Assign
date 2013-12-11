@@ -24,9 +24,34 @@ public:
         ready_ctr=0;         //# of GPUs, which are ready for accepting task
         sum_buf=0;           //# of clock toggling
     }
-    
     /*scan all GPUs to mantain map<int, int> for GPU status*/
     int parse(GPU *gpu_16[]){
+        ready_ctr=0;
+        for (int c1=0; c1<16; c1+=2) {
+            int c2 = c1+1;
+            GPU_map[c1]=1;
+            GPU_map[c2]=1;
+            if (gpu_16[c1]->f_ready==1 && gpu_16[c2]->f_ready==1) {
+                ready_ctr+=2;
+                GPU_map[c1]=0;
+                GPU_map[c2]=0;
+            }else if (gpu_16[c1]->f_idle==1 && gpu_16[c2]->f_ready==1){
+                gpu_16[c1]->passive_idle();
+                gpu_16[c2]->passive_idle_();
+            }else if (gpu_16[c1]->f_ready==1 && gpu_16[c2]->f_idle==1){
+                gpu_16[c1]->passive_idle_();
+                gpu_16[c2]->passive_idle();
+            }else if (gpu_16[c1]->f_idle==1 && gpu_16[c2]->f_idle==1){
+                gpu_16[c1]->passive_idle();
+                gpu_16[c2]->passive_idle();
+            }
+            
+        }
+        return ready_ctr;            //inform to buffer how many tasks should be sent
+    }
+    
+    /*scan all GPUs to mantain map<int, int> for GPU status*/
+    int parse_old(GPU *gpu_16[]){
         ready_ctr=0;
         for (int counter=0; counter<16; counter++) {
             if(gpu_16[counter]->f_ready==1){
@@ -34,13 +59,28 @@ public:
                 ready_ctr++;
             }else{
                 GPU_map[counter]=1;  //passive_idle
-                gpu_16[counter]->passive_idle();
+                if (counter%2==0) {
+                    if (gpu_16[counter+1]->f_idle==0) {
+                        gpu_16[counter+1]->passive_idle_();
+                    }else{
+                        gpu_16[counter]->passive_idle();
+                    }
+                }else{
+                    if (gpu_16[counter-1]->f_idle==0) {
+                        gpu_16[counter-1]->passive_idle_();
+                    }else{
+                        gpu_16[counter]->passive_idle();
+                    }
+                }
+                //gpu_16[counter]->passive_idle();
                 
             }
                 
         }
         return ready_ctr;            //inform to buffer how many tasks should be sent
     }
+    
+    
     
     
     /*assign task to GPUs*/

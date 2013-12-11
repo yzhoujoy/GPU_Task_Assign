@@ -62,7 +62,7 @@ public:
     }
     
     int drop_cost(int num_of_drop){
-        sum += num_of_drop*5;
+        sum = num_of_drop*5;
         return sum;
     }
     

@@ -22,11 +22,26 @@ int main(){
     }
     GPU_Controller *controller= new GPU_Controller();
     double task_temp[10];
-    double task_arr [500];
+    double task_arr [30000];
     int task_counter=0;
-    for (int n=0; n<300; n++) {
+    for (int n=0; n<30000; n++) {
         task_arr[n]=1;
     }
+    
+//    double time_arr[4];
+//    int num;
+//    
+//    time_arr[0]=0.25;
+//    time_arr[1]=0.5;
+//    time_arr[2]=0.75;
+//    time_arr[3]=1;
+//    for(int i=0;i<30000;i++)
+//    {
+//        num = rand()%4;
+//        //cout<<"random number is "<<num<<endl;
+//        task_arr[i] = time_arr[num];
+//        cout<<"task array !!!!!"<<i<<"   "<<task_arr[i]<<endl;
+//    }
 
     
     Buffer *obj = new Buffer();
@@ -34,7 +49,7 @@ int main(){
     double *input_arr=NULL;
     
     
-    for (int i=0; i<16; i++) {                    //for duration
+    for (int i=0; i<3000; i++) {                    //for duration
         cout<<"$$$$$$$$$$$$$$$$$ "<<i<<endl;
         
         //empty buffer size

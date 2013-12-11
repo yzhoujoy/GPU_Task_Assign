@@ -37,9 +37,9 @@ public:
         double avg =0;
         array[ctr] = time;
 
-        if(ctr>=9)
+        if(counter>=9)
         {
-            for(int i=ctr; i>ctr-9; i--)
+            for(int i=0; i<10; i++)
             {
                 sum +=array[i];
                 
@@ -64,8 +64,20 @@ public:
             f_idle=0;
             f_ready=1;
             cout<<"go to ready!!!!!!!!!!!!!!!!!!!!!!!!"<<endl;
+            for (int i=0; i<10; i++) {
+                array[i]=0;
+            }
             ready();
         }
+    }
+    
+    void passive_idle_(){
+        k=3;
+        f_idle=1;      //force to idle
+        f_ready=0;     //not ready to work
+        hot=1;
+        k-=2;
+        cout<<"k_ = "<<k<<endl;
     }
     
     void ready(){
