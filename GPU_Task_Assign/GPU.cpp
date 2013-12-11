@@ -9,7 +9,7 @@
 #include "GPU.h"
 using namespace std;
 
-class GPU {
+class GPU { 
 
 public:
     int hot,k,counter,f_idle,f_ready;//time;
